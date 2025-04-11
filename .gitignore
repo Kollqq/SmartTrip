@@ -19,7 +19,7 @@ __pycache__/
 tests/
 
 # Файлы с секретами (например, .env)
-.env
+./backend/.env
 
 # Логи
 *.log
