@@ -69,6 +69,21 @@ header {
     margin-top: 25px; /* Добавлено, чтобы была небольшая отступка сверху */
 }
 
+.switch-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.switch-label {
+    font-size: 16px;
+}
+
+.switch-group .switch-label {
+    color: #707070;
+}
+
 /* Для мобильных устройств */
 @media (max-width: 768px) {
     .search-form {
@@ -84,6 +99,14 @@ header {
         width: 100%;
         margin-top: 0;
         align-self: end;
+    }
+
+    .switch-group {
+    flex-direction: column;
+    align-items: flex-start;
+    }
+    .switch-label {
+        margin-bottom: 8px;
     }
 }
 

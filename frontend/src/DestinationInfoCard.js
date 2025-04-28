@@ -52,7 +52,6 @@ const DestinationInfoCard = ({ location, weather, restaurants, flights }) => {
           )}
         </div>
 
-        {/* Right — Map with restaurants */}
         <div className="map-container">
           <h3>Restaurants</h3>
           <MapContainer
@@ -87,7 +86,6 @@ const DestinationInfoCard = ({ location, weather, restaurants, flights }) => {
         </div>
       </div>
 
-      {/* Section with tickets */}
       {flights.length > 0 && (
         <div className="flight-info">
           {flights.map((flight, index) => {
