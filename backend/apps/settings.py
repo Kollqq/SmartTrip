@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2a^6l*pc4&5(7lj8re55+2l@3s3t6vf)i!dmbj(3wrgbk(r(&_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-app', 'web-app:8000']
 
 
 # Application definition
@@ -44,9 +44,11 @@ INSTALLED_APPS = [
     'locations',
     'users',
     'weather',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -86,6 +88,11 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",# React
+]
 
 
 # Password validation

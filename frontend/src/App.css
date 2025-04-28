@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Основной контейнер */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Заголовок страницы */
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Стили для формы */
+.search-form {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 колонки для формы */
+    gap: 20px;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.search-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-form label {
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #333;
+}
+
+.search-form input {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+    transition: border-color 0.3s;
+    min-height: 20px;
+}
+
+.search-form input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.primary-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    min-height: 41px;
+    margin-top: 25px; /* Добавлено, чтобы была небольшая отступка сверху */
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .search-form {
+        grid-template-columns: 1fr; /* 1 колонка на мобильных */
+    }
+
+    .search-form .form-group {
+        grid-column: span 1;
+    }
+
+    .search-form button {
+        grid-column: span 1;
+        width: 100%;
+        margin-top: 0;
+        align-self: end;
+    }
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.02);
+}
+
+/* Стили для основной карточки */
+.info-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.destination-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.city-flag {
+    width: 30px;
+    height: auto;
+    margin-left: 10px;
+}
+
+/* Контейнер для информации о месте */
+.destination-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+/* Стили для блока с погодой */
+.weather-info {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.map-container {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.flight-info {
+    margin-top: 20px;
+}
+
+.flight-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.flight-link {
+    display: inline-block;
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.flight-link:hover {
+    text-decoration: underline;
+}
+
+.flight-link.secondary {
+    display: inline-block;
+    color: #6c757d; /* Цвет для "Остальных билетов" */
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.flight-link.secondary:hover {
+    text-decoration: underline;
+}
+
+.intro {
+  min-height: 20vh; /* Убедитесь, что места достаточно для формы и заголовка */
+}
+
+/* Контейнер под результаты */
+.results-container {
+  min-height: 200px; /* зарезервировано под loader */
+  transition: all 0.5s ease;
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center; /* Чтобы компоненты были по центру */
+  align-items: center;
+}
+
+/* Когда есть результаты — убираем min-height */
+.results-container.expanded {
+  display: block;
+  min-height: 100px;
+}
+/* Стили для карты */
+.leaflet-container {
+    width: 100%;
+    height: 300px;
+}
+
+/* Стили для загрузки */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #007bff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-text {
+    font-size: 16px;
+    color: #555;
+    font-weight: 500;
+}
+
+/* Основные стили для элементов */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #f2f7ff;
+  color: #1f2933;
+  font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+

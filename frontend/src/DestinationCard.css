@@ -1,0 +1,42 @@
+.destination-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    max-width: 800px;
+    font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.section {
+    margin-top: 20px;
+}
+
+.restaurant-list {
+    list-style: none;
+    padding-left: 0;
+    columns: 2;
+    gap: 30px;
+}
+
+.flight-summary {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.flight-link {
+    display: inline-block;
+    margin-top: 6px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.flight-link:hover {
+    text-decoration: underline;
+}
+
+.flight-link.secondary {
+    color: #6c757d;
+    margin-left: 10px;
+}

@@ -10,7 +10,7 @@ class LocationView(APIView):
         headers = {"User-Agent": "SmartTripApp"}
 
         # Формируем URL запроса к Nominatim
-        search_url = f"https://nominatim.openstreetmap.org/search?q={place}&format=json&addressdetails=1"
+        search_url = f"https://nominatim.openstreetmap.org/search?q={place}&format=json&addressdetails=1&accept-language=en"
 
         try:
             response = requests.get(search_url, headers=headers, timeout=5)
