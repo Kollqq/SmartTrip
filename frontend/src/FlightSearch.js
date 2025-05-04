@@ -14,16 +14,28 @@ const FlightSearch = ({ onSearch }) => {
         onSearch({ origin, destination, departureAt: searchTicket ? departureAt : "" });
     };
 
+    const handleToggle = () => {
+        setSearchTicket(prev => {
+            const newState = !prev;
+            if (!newState) {
+                setOrigin("");
+                setDepartureAt("");
+            }
+            return newState;
+        });
+    };
+
     return (
         <form onSubmit={handleSubmit} className="search-form">
-            <div className="form-group">
+            <div className={`form-group animated-field ${!searchTicket ? 'hidden' : ''}`}>
                 <label>Departure city:</label>
                 <input
                     type="text"
                     value={origin}
                     onChange={(e) => setOrigin(e.target.value)}
                     placeholder="Enter city"
-                    required
+                    required={searchTicket}
+                    disabled={!searchTicket}
                 />
             </div>
 
@@ -38,7 +50,7 @@ const FlightSearch = ({ onSearch }) => {
                 />
             </div>
 
-            <div className="form-group">
+            <div className={`form-group animated-field ${!searchTicket ? 'hidden' : ''}`}>
                 <label>Departure date:</label>
                 <DatePicker
                     selected={departureAt ? new Date(departureAt) : null}
@@ -57,7 +69,7 @@ const FlightSearch = ({ onSearch }) => {
 
             <div className="switch-group">
                 <Switch
-                    onChange={() => setSearchTicket(!searchTicket)}
+                    onChange={handleToggle}
                     checked={searchTicket}
                     onColor="#4CAF50"
                     offColor="#ccc"
