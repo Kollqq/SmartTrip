@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2a^6l*pc4&5(7lj8re55+2l@3s3t6vf)i!dmbj(3wrgbk(r(&_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-app', 'web-app:8000']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'web-app', 'web-app:8000', 'smarttrip-production.up.railway.app']
 
 
 # Application definition
