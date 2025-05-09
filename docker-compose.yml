@@ -1,17 +1,23 @@
+version: '3.9'
+
 services:
-  web-app:
+  web:
     build:
       context: .
-      dockerfile: backend/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
-    volumes:
-      - ./backend:/backend
-    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - DJANGO_SETTINGS_MODULE=apps.settings
+      - PYTHONUNBUFFERED=1
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py collectstatic --noinput &&
+             python manage.py runserver 0.0.0.0:8000"
 
   frontend:
-    build:
-      context: ./frontend
+    image: node:18-alpine    # 🔍 Мы убрали build, теперь просто тянем образ
+    working_dir: /app
     ports:
       - "3000:3000"
     volumes:
@@ -21,4 +27,5 @@ services:
     tty: true
     environment:
       - CHOKIDAR_USEPOLLING=true
-    command: npm start
+    command: >
+      sh -c "npm install && npm start"
