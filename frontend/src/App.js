@@ -10,15 +10,20 @@ const App = () => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [searchTicket, setSearchTicket] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
-  const handleSearch = async ({ origin, destination, departureAt }) => {
+  const handleSearch = async ({ origin, destination, departureAt, searchTicket }) => {
     setLoading(true);
     setError(null);
+    setSearchTicket(searchTicket);
+    setDataLoaded(false);
+    setNotFound(false);
 
     const params = new URLSearchParams();
     params.append("origin", origin);
     params.append("destination", destination);
-    params.append("currency", "PLN");
     params.append("place", destination);
     if (departureAt) {
       params.append("departure_at", departureAt);
@@ -26,19 +31,56 @@ const App = () => {
 
     try {
       const response = await fetch(`http://localhost:8000/api/combined/?${params.toString()}`);
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
+
+      if (response.status === 404) {
+        setNotFound(true);
+        setLocation(null);
+        setWeather(null);
+        setRestaurants([]);
+        setFlights([]);
+        setDataLoaded(true);
+        return;
       }
+
+      if (!response.ok) {
+        throw new Error("Nie udało się pobrać danych z serwera.");
+      }
+
       const data = await response.json();
-      setLocation(data.location?.results?.[0] || null);
-      setWeather(data.weather?.results?.[0] || null);
-      setRestaurants(data.restaurants.results || []);
-      setFlights(data.flights.results || []);
+
+      setLocation(data.location || null);
+      setWeather(data.weather || null);
+      setRestaurants(data.restaurants || []);
+      setFlights(data.flights || []);
     } catch (err) {
-      setError(err.message);
+      console.error("Błąd podczas ładowania danych: ", err.message);
+      setError("Nie udało się załadować danych. Spróbuj ponownie.");
     } finally {
       setLoading(false);
+      setDataLoaded(true);
     }
+  };
+
+  const renderMessages = () => {
+    if (loading) {
+      return (
+        <div className="loader-container">
+          <div className="loader"></div>
+          <p className="loader-text">Loading...</p>
+        </div>
+      );
+    }
+    if (error) {
+      return <p style={{ color: "red" }}>{error}</p>;
+    }
+    if (notFound) {
+      return (
+        <div className="not-found-message">
+          <p>Unfortunately, no data was found for this request.</p>
+        </div>
+      );
+    }
+    return null;
   };
 
   return (
@@ -52,19 +94,15 @@ const App = () => {
       </div>
 
       <div className={`results-container ${location || weather || flights.length ? "expanded" : ""}`}>
-        {loading && (
-          <div className="loader-container">
-            <div className="loader"></div>
-            <p className="loader-text">Loading data...</p>
-          </div>
-        )}
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        {location && (
+        {renderMessages()}
+        {!notFound && location && (
           <DestinationInfoCard
             location={location}
             weather={weather}
             restaurants={restaurants}
             flights={flights}
+            searchTicket={searchTicket}
+            dataLoaded={dataLoaded}
           />
         )}
       </div>

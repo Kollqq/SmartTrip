@@ -1,13 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* Основной контейнер */
 .container {
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
 }
 
-/* Заголовок страницы */
 header {
     text-align: center;
     margin-bottom: 30px;
@@ -18,10 +16,9 @@ header {
     color: #666;
 }
 
-/* Стили для формы */
 .search-form {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 колонки для формы */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     max-width: 1000px;
     margin: 20px auto;
@@ -66,7 +63,7 @@ header {
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
     min-height: 41px;
-    margin-top: 25px; /* Добавлено, чтобы была небольшая отступка сверху */
+    margin-top: 25px;
 }
 
 .switch-group {
@@ -84,10 +81,9 @@ header {
     color: #707070;
 }
 
-/* Для мобильных устройств */
 @media (max-width: 768px) {
     .search-form {
-        grid-template-columns: 1fr; /* 1 колонка на мобильных */
+        grid-template-columns: 1fr;
     }
 
     .search-form .form-group {
@@ -102,11 +98,15 @@ header {
     }
 
     .switch-group {
-    flex-direction: column;
-    align-items: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
     }
     .switch-label {
         margin-bottom: 8px;
+    }
+
+    .destination-content {
+        flex-direction: column;
     }
 }
 
@@ -115,7 +115,6 @@ header {
     transform: scale(1.02);
 }
 
-/* Стили для основной карточки */
 .info-card {
     background: white;
     border-radius: 12px;
@@ -136,7 +135,6 @@ header {
     margin-left: 10px;
 }
 
-/* Контейнер для информации о месте */
 .destination-content {
     display: flex;
     flex-wrap: wrap;
@@ -145,7 +143,6 @@ header {
     margin-top: 20px;
 }
 
-/* Стили для блока с погодой */
 .weather-info {
     flex: 1;
     padding: 20px;
@@ -187,7 +184,7 @@ header {
 
 .flight-link.secondary {
     display: inline-block;
-    color: #6c757d; /* Цвет для "Остальных билетов" */
+    color: #6c757d;
     font-weight: bold;
     margin-left: 10px;
 }
@@ -197,38 +194,37 @@ header {
 }
 
 .intro {
-  min-height: 20vh; /* Убедитесь, что места достаточно для формы и заголовка */
+  min-height: 20vh;
 }
 
-/* Контейнер под результаты */
 .results-container {
-  min-height: 200px; /* зарезервировано под loader */
+  min-height: 200px;
   transition: all 0.5s ease;
   max-width: 1000px;
   margin: 0 auto;
   display: flex;
-  justify-content: center; /* Чтобы компоненты были по центру */
+  justify-content: center;
   align-items: center;
 }
 
-/* Когда есть результаты — убираем min-height */
 .results-container.expanded {
   display: block;
   min-height: 100px;
+  animation: fadeIn 0.5s ease;
 }
-/* Стили для карты */
+
 .leaflet-container {
     width: 100%;
     height: 300px;
 }
 
-/* Стили для загрузки */
 .loader-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 40px 0;
+    animation: fadeIn 0.5s ease;
 }
 
 .loader {
@@ -252,7 +248,54 @@ header {
     font-weight: 500;
 }
 
-/* Основные стили для элементов */
+.no-tickets-message {
+    background-color: #ffcccc;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+.flag-icon {
+  vertical-align: baseline;
+  margin-right: 8px;
+  width: 30px;
+  height: 24px;
+  border-radius: 2px;
+  border: 1px solid #000;
+}
+
+.not-found-message {
+    background-color: #ffcccc;
+    color: #cc0000;
+    border: 1px solid #cc0000;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 500;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -263,4 +306,3 @@ body {
   color: #1f2933;
   font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
-
