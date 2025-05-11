@@ -30,7 +30,7 @@ const App = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:8000/api/combined/?${params.toString()}`);
+      const response = await fetch(`https://smarttrip-backend-production.up.railway.app/api/combined/?${params.toString()}`);
 
       if (response.status === 404) {
         setNotFound(true);

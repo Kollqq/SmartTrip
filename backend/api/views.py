@@ -64,7 +64,7 @@ class CombinedDataView(APIView):
 
         location_data = self.get_location_data(request)
         if not location_data:
-            return Response({"error": "Город не найден"}, status=status.HTTP_404_NOT_FOUND)
+            return Response({"error": "Miasto nie znalezione"}, status=status.HTTP_404_NOT_FOUND)
 
         result["location"] = location_data
         lat, lon = location_data["latitude"], location_data["longitude"]

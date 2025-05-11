@@ -1,0 +1,1 @@
+export const API_URL = "https://smarttrip-backend-production.up.railway.app/api/";
